@@ -1,0 +1,65 @@
+<section class="w-full flex inter-uniquifier">
+    <div class="bg-[#0C1427] h-[100vh] w-[40%] relative">
+        <div class="p-[30px] flex">
+            <span class="text-[#FFFFFF] font-bold text-[20px]">Direct</span>
+            <span class="text-[#F20000] font-bold text-[20px]">CBA</span>
+        </div>
+        <div class="flex flex-col px-[50px] mt-[120px]">
+            <span class="text-[#FFFFFF] font-bold text-[32px]">Bank Integration <br> Configuration Portal</span>
+            <span class="text-[#FFFFFF]/50 font-medium text-[16px] mt-[10px]">
+                Manage wallet-to-bank and bank-to-wallet endpoints, token <br> authentication, and fee structures for all connected financial <br> institutions
+            </span>
+        </div>
+        <div class="flex items-center gap-[10px] px-[50px] mt-[60px]">
+            <div class="border border-3 border-[#2563EB]/30 w-[64px] h-[1px]"></div>
+            <div class="flex gap-[10px] items-center">
+                <div class="text-[#FFFFFF]/50">SECURE</div>
+                <div class="h-[2.5px] w-[4px] rounded-full bg-[#FFFFFF]/50"></div>
+                <div class="text-[#FFFFFF]/50">RELIABLE</div>
+                 <div class="h-[2.5px] w-[4px] rounded-full bg-[#FFFFFF]/50"></div>
+                <div class="text-[#FFFFFF]/50">FAST</div>
+            </div>
+        </div>
+        <div class="flex justify-between px-[40px] mt-[60px]">
+            <img src="cbapar.svg" alt="">
+            <img src="cbasecure.svg" alt="">
+            <img src="cbashield.svg" alt="">
+            <img src="cbascale.svg" alt="">
+            <img src="cbadll.svg" alt="">
+        </div>
+        <div class="absolute top-[53%] left-[39%]">
+            <img src="blurlayer.svg" alt="">
+        </div>
+    </div>
+
+    <div class="bg-[#F8FAFC] w-[100%] md:w-[60%] lg:w-[60%] h-[100vh] flex flex-col  m-auto">
+        <div class=" items-center flex flex-col max-w-[800px] md:max-w-[430px] lg:max-w-[430px] mt-[230px] ml-[250px]">
+        <div class="flex flex-col text-center gap-[4px]">
+            <span class="font-semibold text-[#000000] text-[25px]">Welcome Back!</span>
+            <span class="text-[#000000]/50 font-normal text-[15px]">Sign in to manage bank configurations</span>
+        </div>
+         <form  class="w-full space-y-2" nzform >
+            <nz-form-item class="flex flex-col">
+            <label for="email" class="mb-1 text-[12px] md:text-[14px] lg:text-[14px]">Username</label>
+            <input nz-input type="email" name="username" required placeholder="Enter username" 
+            class="border border-[#D7D7D7] text-[#7C7C7C] p-2 !rounded-[8px] h-[35px] md:h-[45px] ">
+            </nz-form-item>
+    
+            <nz-form-item class="flex flex-col relative">
+            <label for="password" class="mb-1 text-[12px] md:text-[14px] lg:text-[14px]">Password</label>
+            <input type="password" required  nz-input name="password"
+                placeholder="Enter password" class="border border-[#D7D7D7] text-[#7C7C7C] p-2 pr-10
+                !rounded-[8px] h-[35px] md:h-[45px] w-full"/>
+            </nz-form-item>
+      
+        <div class="mt-4">
+          <button (click)="onSubmit()"
+           type="submit" class="mt-[8%] w-full bg-[#163993] !text-white p-2 text-[12px] md:text-[16px] lg:text-[16px]
+           rounded-[8px] font-[400] m-auto h-[35px] md:h-[45px] lg:h-[45px] flex items-center justify-center">Sign In
+          </button>
+          <!-- <div><nz-spin *ngIf="loadingState" nzSimple class="spinner m-auto ml-[160px] md:ml-[140px] lg:ml-[160px] md:mt-[20px] "></nz-spin></div>  -->
+        </div>
+      </form>       
+    </div>
+    </div>
+</section>

@@ -1,0 +1,54 @@
+<section class="inter-uniquifier">
+    <div class="bg-gradient-to-r from-[#19243D] to-[#425FA3] p-[20px] w-[100%] flex items-center justify-between h-[7vh]">
+        <div class="p-[30px] flex gap-2">
+            <span class="text-[#FFFFFF] font-bold text-[20px]">Direct</span>
+            <span class="text-[#F20000] font-bold text-[20px]">CBA</span>
+        </div>
+        <div><span class="text-[#FFFFFF] font-normal text-[15px]">Bank Configuration</span></div>
+        <div> <span class="text-[#FFFFFF] font-normal text-[15px]">Admin</span></div>
+    </div>
+    <div class="bg-[#F8FAFC] h-[93vh] p-[54px]">
+        <div class="flex justify-between">
+            <div class="flex flex-col">
+                <span class="text-[#000000] font-bold text-[20px]">Bank Integrations</span>
+                <span class="text-[#000000]/50 font-normal text-[14px]">Manage connected  financial institutions, endpoints, and authentication</span>
+           </div>
+           <div class="flex gap-2">
+            <div class="border border-[#D7D7D7] rounded-md h-[32px] w-auto flex items-center justify-center">
+                <input type="text" placeholder="Search banks...">
+            </div>
+            <div></div>
+           </div>
+        </div>
+       
+        <div class="border border-[#DCDEE3] rounded-lg w-full mt-[30px] h-[70vh] bg-white">
+            <nz-table [nzScroll]="{ x: '1300px',y:'365px' }" [nzBordered]="false" [nzShowPagination]="false" [nzData]="BankList">
+                <thead>
+                    <tr class="text-[12px] md:text-[13px] lg:text-[14px] font-normal text-[#6E6893]">
+                        <th nzWidth="150px"> Bank Name</th>
+                        <th nzWidth="200px">W2B</th>
+                        <th nzWidth="100px">B2W</th>
+                        <th nzWidth="70px">Fee(%)</th>
+                        <th nzWidth="70px">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr 
+                        class="text-[10px] md:text-[14px] lg:text-[15px] text-[#7D7D7D]">
+                        <td>Ghana Commercial Bank</td>
+                        <td>https://api/transfers/wallet-to-bank</td>
+                        <td>
+                            /transfers/bank-to-wallet
+                        </td>
+                        <td>1.5%</td>
+                        <td>
+                            <div class="flex border border-[#E4E7EC] rounded-md h-[32px] w-[32px] items-center justify-center cursor-pointer">
+                             <img src="menudots.svg" alt="" class="h-[16px]">    
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </nz-table>
+        </div>
+    </div>
+</section>

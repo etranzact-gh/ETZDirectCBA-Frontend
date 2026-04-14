@@ -1,0 +1,14 @@
+::ng-deep .ant-table-thead > tr> th {
+    color: #727A90;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+::ng-deep .ant-table-tbody > tr> td {
+    font-size: 13px;
+    font-weight: 500;
+}
+
+::ng-deep .ant-table-thead > tr > th {
+  background-color: #F8FAFC !important;
+}
