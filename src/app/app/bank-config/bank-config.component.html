@@ -1,49 +1,124 @@
 <section class="inter-uniquifier">
-    <div class="bg-gradient-to-r from-[#19243D] to-[#425FA3] p-[20px] w-[100%] flex items-center justify-between h-[7vh]">
-        <div class="p-[30px] flex gap-2">
-            <span class="text-[#FFFFFF] font-bold text-[20px]">Direct</span>
-            <span class="text-[#F20000] font-bold text-[20px]">CBA</span>
+    <div
+        class="bg-gradient-to-r from-[#19243D] to-[#425FA3] px-6 md:px-10 lg:px-14 py-3 w-full flex items-center justify-between h-[7vh]">
+        <div class="flex gap-1 md:gap-2 lg:gap-2">
+            <span class="text-[#FFFFFF] font-bold text-[14px] md:text-[18px] lg:text-[20px]">Direct</span>
+            <span class="text-[#F20000] font-bold text-[14px] md:text-[18px] lg:text-[20px]">CBA</span>
         </div>
-        <div><span class="text-[#FFFFFF] font-normal text-[15px]">Bank Configuration</span></div>
-        <div> <span class="text-[#FFFFFF] font-normal text-[15px]">Admin</span></div>
+
+        <div (click)="openProfile($event)" class="flex items-center gap-2">
+
+            <span class="w-[17px] h-[17px] md:w-[20px] md:h-[20px] lg:w-[27px] lg:h-[27px] border rounded-full bg-white text-[#2563EB]
+                text-[11px] md:text-[14px] lg:text-[14px] font-semibold p-2 flex items-center justify-center">AD</span>
+
+            <span class="text-[#FFFFFF] font-normal text-[14px] md:text-[15px] lg:text-[16px]">
+                Admin
+            </span>
+
+            <img *ngIf="!isProfileOpen" src="/arrow-down.png" alt="">
+            <img *ngIf="isProfileOpen" src="/up-arrow.svg" alt="">
+
+        </div>
     </div>
-    <div class="bg-[#F8FAFC] h-[93vh] p-[54px]">
+    <div class="bg-[#F8FAFC] min-h-screen p-4 md:p-8 lg:p-12">
         <div class="flex justify-between">
             <div class="flex flex-col">
-                <span class="text-[#000000] font-bold text-[20px]">Bank Integrations</span>
-                <span class="text-[#000000]/50 font-normal text-[14px]">Manage connected  financial institutions, endpoints, and authentication</span>
-           </div>
-           <div class="flex gap-2">
-            <div class="border border-[#D7D7D7] rounded-md h-[32px] w-auto flex items-center justify-center">
-                <input type="text" placeholder="Search banks...">
+                <span class="text-[#000000] font-semibold text-[16px] md:text-[18px] lg:text-[20px]">Bank
+                    Integrations</span>
+                <span class="text-[#000000]/50 font-normal text-[11px] md:text-[14px] lg:text-[14px]">Manage connected
+                    financial institutions, endpoints, and authentication</span>
             </div>
-            <div></div>
-           </div>
+            <!-- <div class="flex flex-col md:flex-row md:items-center gap-2 w-full md:w-auto">
+
+                <div
+                    class="search-wrapper w-full md:w-[300px] lg:w-[380px] h-[32px] flex gap-2 text-gray-400  p-1 border border-[#D7D7D7] pl-2 md:pl-4 lg:pl-4 rounded-md items-center">
+                    <img src="/search.png" alt="" class="w-[20px] h-[20px]">
+                    <input type="text" name="searchUnit" id="searchUnit" [(ngModel)]="searchQuery"
+                        (input)="searchforBank()" placeholder="Search banks, codes, URLs..."
+                        class="w-full rounded-lg !text-[12px] md:!text-[15px] outline-none">
+                </div>
+                <button (click)="showModal()"
+                    class=" bg-blue-600 rounded-md h-[32px] w-[120px] md:w-[150px] lg:w-[170px] p-2 flex flex-end gap-1 items-center 
+                    justify-center cursor-pointer sm:flex-end">
+                     <img src="/plus.svg" alt="" class="lg:w-[24px] md:w-[24px] w-[20px]">
+                    <span class="text-white font-normal text-[11px] md:text-[13px] lg:text-[14px] flex items-center gap-1">
+                       Add New Bank</span>
+                </button>
+            </div> -->
+            <div class="flex flex-col md:flex-row md:items-center gap-2 w-full md:w-auto">
+
+                <!-- Search -->
+                <div
+                    class="search-wrapper w-full md:w-[300px] lg:w-[380px] h-[40px] flex gap-2 text-gray-400 p-1 border border-[#D7D7D7] pl-3 rounded-md items-center">
+
+                    <img src="/search.png" alt="" class="w-[20px] h-[20px]">
+                    <input type="text" name="searchUnit" id="searchUnit" [(ngModel)]="searchQuery"
+                        (input)="searchforBank()" (ngModelChange)="onSearchChange($event)"
+                        placeholder="Search banks, codes, URLs..."
+                        class="w-full rounded-lg text-[13px] md:text-[15px] outline-none bg-transparent">
+                </div>
+
+                <button (click)="showModal()" class="bg-blue-600 rounded-md h-[40px] 
+    w-full md:w-[120px] lg:w-[170px]
+    p-2 flex gap-1 items-center justify-center cursor-pointer">
+
+                    <img src="/plus.svg" alt="" class="w-[20px] md:w-[22px] lg:w-[24px]">
+
+                    <span class="text-white font-normal text-[12px] md:text-[12px] lg:text-[14px]">
+                        Add New Bank
+                    </span>
+                </button>
+            </div>
+
         </div>
-       
-        <div class="border border-[#DCDEE3] rounded-lg w-full mt-[30px] h-[70vh] bg-white">
-            <nz-table [nzScroll]="{ x: '1300px',y:'365px' }" [nzBordered]="false" [nzShowPagination]="false" [nzData]="BankList">
+
+        <div class="border border-[#DCDEE3] rounded-lg w-full mt-[30px] overflow-x-auto overflow-y-visible">
+            <nz-table [nzScroll]="{ x: '1300px',y:'545px' }" [nzBordered]="false" [nzShowPagination]="false"
+                [nzData]="BankList">
                 <thead>
                     <tr class="text-[12px] md:text-[13px] lg:text-[14px] font-normal text-[#6E6893]">
                         <th nzWidth="150px"> Bank Name</th>
-                        <th nzWidth="200px">W2B</th>
-                        <th nzWidth="100px">B2W</th>
-                        <th nzWidth="70px">Fee(%)</th>
-                        <th nzWidth="70px">Actions</th>
+                        <th nzWidth="200px">Wallet-to-Bank Endpoint</th>
+                        <th nzWidth="110px">W2B Fee(%)</th>
+                        <th nzWidth="200px">Bank-to-Wallet Endpoint</th>
+                        <th nzWidth="110px">B2W Fee(%)</th>
+                        <th nzWidth="200px">Account-to-Account Endpoint</th>
+                        <th nzWidth="110px">A2A Fee(%)</th>
+                        <th nzWidth="200px">Interbank Endpoint</th>
+                        <th nzWidth="110px">Interbank Fee(%)</th>
+                        <th nzWidth="200px">Loan Endpoint</th>
+                        <th nzWidth="110px">Loan Fee(%)</th>
+                        <th nzWidth="200px">Bill Fee(%)</th>
+                        <th nzWidth="110px">Airtime Fee(%)</th>
+                        <th nzWidth="100px">Actions</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr 
-                        class="text-[10px] md:text-[14px] lg:text-[15px] text-[#7D7D7D]">
-                        <td>Ghana Commercial Bank</td>
-                        <td>https://api/transfers/wallet-to-bank</td>
-                        <td>
-                            /transfers/bank-to-wallet
-                        </td>
-                        <td>1.5%</td>
-                        <td>
-                            <div class="flex border border-[#E4E7EC] rounded-md h-[32px] w-[32px] items-center justify-center cursor-pointer">
-                             <img src="menudots.svg" alt="" class="h-[16px]">    
+                    <tr *ngFor="let bank of BankList" class="text-[10px] md:text-[14px] lg:text-[15px] text-[#7D7D7D]">
+                        <td>{{ bank.bankName }}</td>
+                        <td>{{ bank.w2bEndpoint || 'N/A'}}</td>
+                        <td>{{bank.w2bFees}}</td>
+                        <td>{{bank.b2wEndpoint || 'N/A'}}</td>
+                        <td>{{bank.b2wFees}}</td>
+                        <td>{{bank.a2aEndpoint || 'N/A'}}</td>
+                        <td>{{bank.a2aFees}}</td>
+                        <td>{{bank.interBankEndpoint || 'N/A'}}</td>
+                        <td>{{bank.interBankFees}}</td>
+                        <td>{{bank.loanEndpoint || 'N/A'}}</td>
+                        <td>{{bank.loanFees}}</td>
+                        <td>{{bank.billFees}}</td>
+                        <td>{{bank.airtimeFees}}</td>
+                        <td class="relative">
+                            <div class="flex justify-center">
+                                <!-- <button [nzDropdownMenu]="menu" (click)="openAction($event, bank)"
+                    class="flex border border-[#E4E7EC] rounded-md h-[32px] w-[32px] items-center justify-center cursor-pointer hover:bg-gray-50">
+                        <img src="menudots.svg" alt="" class="h-[16px]">
+                        </button> -->
+                                <button nz-dropdown nzTrigger="click" [nzDropdownMenu]="menu"
+                                    (nzVisibleChange)="selectedBank = bank"
+                                    class="flex border border-[#E4E7EC] rounded-md h-[32px] w-[32px] items-center justify-center cursor-pointer hover:bg-gray-50">
+                                    <img src="menudots.svg" alt="" class="h-[16px]">
+                                </button>
                             </div>
                         </td>
                     </tr>
@@ -51,4 +126,455 @@
             </nz-table>
         </div>
     </div>
+
+    <!-- ADD BANK MODAL -->
+    <nz-modal [(nzVisible)]="isVisible" nzTitle="New Bank Configuration" [nzFooter]="null"
+        (nzOnCancel)="handleCancel()">
+        <ng-container *nzModalContent>
+            <div style="max-height: 60vh; overflow-y: auto; padding-right: 8px;">
+                <form #newBankForm="ngForm" (ngSubmit)="submit(newBankForm)">
+                    <div class="border-b border-gray-200 -mx-6 px-6 pb-4">
+                        <nz-form-item class="mb-2">
+                            <label class="text-[#000000] font-normal text-[14px] block mb-1">Bank Name</label>
+                            <input type="text" [(ngModel)]="newBank.bankName" name="bankName"
+                                class="border border-[#E2E8F0] bg-[#F1F5F9] rounded-md h-[32px] w-full h-[35px] p-2 text-sm"
+                                placeholder="eg. GCB Bank">
+                        </nz-form-item>
+
+                        <nz-form-item class="mb-2">
+                            <label class="text-[#000000] font-normal text-[14px] block mb-1">Bank Code</label>
+                            <input type="text" [(ngModel)]="newBank.bankCode" name="bankCode"
+                                class="border border-[#E2E8F0] bg-[#F1F5F9] rounded-md h-[32px] w-full h-[35px] p-2 text-sm"
+                                placeholder="eg. GCB">
+                        </nz-form-item>
+
+                        <!-- <nz-form-item class="mb-0 pb-2">
+                                                <label class="text-[#000000] font-normal text-[14px] block mb-1">Fee Percentage (%)</label>
+                                                <input type="text" [(ngModel)]="newBank.feePercentage" name="feePercentage"
+                                                    class="border border-[#E2E8F0] bg-[#F1F5F9] rounded-md h-[32px] w-full h-[35px] p-2 text-sm"
+                                                    placeholder="eg. 1.5">
+                                            </nz-form-item> -->
+                    </div>
+
+                    <!-- ENDPOINT CONFIGURATION Section -->
+                    <div class="mt-3">
+                        <h3 class="text-sm mb-2 text-[#00000080] font-medium">ENDPOINT CONFIGURATION</h3>
+
+                        <div class="space-y-2 border-b border-gray-200 -mx-6 px-6 pb-4">
+                            <!-- w2b Endpoint -->
+                            <nz-form-item class="flex flex-col mb-2">
+                                <div class="flex items-center justify-between">
+                                    <h3 class="font-medium text-sm">Enable Wallet-to-Bank Endpoint</h3>
+
+                                    <nz-radio-group [(ngModel)]="newBank.w2bEnabled" name="walletToBank">
+                                        <label nz-radio [nzValue]="true" class="mr-2">Yes</label>
+                                        <label nz-radio [nzValue]="false">No</label>
+                                    </nz-radio-group>
+                                </div>
+
+                                <div *ngIf="newBank.w2bEnabled" class="mt-2">
+                                    <label for="w2bEndpoint">Enter Endpoint URL</label>
+                                    <input type="text" [(ngModel)]="newBank.w2bEndpoint" name="w2bEndpointUrl"
+                                        placeholder="Enter Wallet-to-Bank Endpoint"
+                                        class="mb-1 border border-[#E2E8F0] rounded-md p-2 w-full bg-[#F1F5F9]">
+                                    <label for="w2bEndpoint">Enter Wallet-to-Bank Fees</label>
+                                    <input type="text" [(ngModel)]="newBank.w2bFees" name="w2bFees"
+                                        placeholder="Enter fees"
+                                        class="border border-[#E2E8F0] rounded-md p-2 w-full bg-[#F1F5F9]">
+                                </div>
+                            </nz-form-item>
+
+                            <!-- b2w Endpoint -->
+                            <nz-form-item class="flex flex-col mb-2">
+                                <div class="flex items-center justify-between">
+                                    <h3 class="font-medium text-sm">Enable Bank-to-Wallet Endpoint</h3>
+                                    <nz-radio-group [(ngModel)]="newBank.b2wEnabled" name="bankToWallet">
+                                        <label nz-radio [nzValue]="true" class="mr-2">Yes</label>
+                                        <label nz-radio [nzValue]="false">No</label>
+                                    </nz-radio-group>
+                                </div>
+                                <div *ngIf="newBank.b2wEnabled" class="mt-2">
+                                    <label for="b2wEndpoint">Enter Endpoint URL</label>
+                                    <input type="text" [(ngModel)]="newBank.b2wEndpoint" name="b2wEndpointUrl"
+                                        placeholder="Enter Bank-to-Wallet Endpoint"
+                                        class="mb-1 border border-[#E2E8F0] rounded-md p-2 w-full bg-[#F1F5F9]">
+                                    <label for="b2wEndpoint">Enter Bank-to-Wallet Fees</label>
+                                    <input type="text" [(ngModel)]="newBank.b2wFees" name="b2wFees"
+                                        placeholder="Enter fees"
+                                        class="border border-[#E2E8F0] rounded-md p-2 w-full bg-[#F1F5F9]">
+                                </div>
+                            </nz-form-item>
+
+                            <nz-form-item class="flex flex-col mb-2">
+                                <div class="flex items-center justify-between">
+                                    <h3 class="font-medium text-sm">Enable Account to Account Endpoint</h3>
+                                    <nz-radio-group [(ngModel)]="newBank.a2aEnabled" name="accountToAccount">
+                                        <label nz-radio [nzValue]="true" class="mr-2">Yes</label>
+                                        <label nz-radio [nzValue]="false">No</label>
+                                    </nz-radio-group>
+                                </div>
+
+                                <!-- <div *ngIf="newBank.a2aEnabled" class="mt-2"> -->
+                                <div *ngIf="newBank.a2aEnabled" class="mt-2">
+                                    <label for="a2aEndpoint">Enter Endpoint URL</label>
+                                    <input type="text" [(ngModel)]="newBank.a2aEndpoint" name="a2aEndpointUrl"
+                                        placeholder="Enter Account-to-Account Endpoint"
+                                        class="mb-1 border border-[#E2E8F0] rounded-md p-2 w-full bg-[#F1F5F9]">
+                                    <label for="a2aEndpoint">Enter Account-to-Account Fees</label>
+                                    <input type="text" [(ngModel)]="newBank.a2aFees" name="a2aFees"
+                                        placeholder="Enter fees"
+                                        class="border border-[#E2E8F0] rounded-md p-2 w-full bg-[#F1F5F9]">
+                                </div>
+                                <!-- </div> -->
+                            </nz-form-item>
+
+                            <nz-form-item class="flex flex-col mb-2">
+                                <div class="flex items-center justify-between">
+                                    <h3 class="font-medium text-sm">Enable Interbank Endpoint</h3>
+                                    <nz-radio-group [(ngModel)]="newBank.interbankEnabled" name="interbank">
+                                        <label nz-radio [nzValue]="true" class="mr-2">Yes</label>
+                                        <label nz-radio [nzValue]="false">No</label>
+                                    </nz-radio-group>
+                                </div>
+
+                                <div *ngIf="newBank.interbankEnabled" class="mt-2">
+                                    <div *ngIf="newBank.interbankEnabled" class="mt-2">
+                                        <label for="interBankEndpoint">Enter Endpoint URL</label>
+                                        <input type="text" [(ngModel)]="newBank.interBankEndpoint"
+                                            name="interbankEndpointUrl" placeholder="Enter Interbank Endpoint"
+                                            class="mb-1 border border-[#E2E8F0] rounded-md p-2 w-full bg-[#F1F5F9]">
+                                        <label for="interBankEndpoint">Enter Interbank Fees(GIP)</label>
+                                        <input type="text" [(ngModel)]="newBank.interBankFees" name="interbankFees"
+                                            placeholder="Enter fees"
+                                            class="border border-[#E2E8F0] rounded-md p-2 w-full bg-[#F1F5F9]">
+                                    </div>
+                                </div>
+                            </nz-form-item>
+
+                            <nz-form-item class="flex flex-col mb-2">
+                                <div class="flex items-center justify-between">
+                                    <h3 class="font-medium text-sm">Enable Loan Endpoint</h3>
+                                    <nz-radio-group [(ngModel)]="newBank.loanEnabled" name="loan">
+                                        <label nz-radio [nzValue]="true" class="mr-2">Yes</label>
+                                        <label nz-radio [nzValue]="false">No</label>
+                                    </nz-radio-group>
+                                </div>
+
+                                <div *ngIf="newBank.loanEnabled" class="mt-2">
+                                    <div *ngIf="newBank.loanEnabled" class="mt-2">
+                                        <label for="loanEndpoint">Enter Endpoint URL</label>
+                                        <input type="text" [(ngModel)]="newBank.loanEndpoint" name="loanEndpointUrl"
+                                            placeholder="Enter Loan Endpoint"
+                                            class="mb-1 border border-[#E2E8F0] rounded-md p-2 w-full bg-[#F1F5F9]">
+                                        <label for="loanEndpoint">Enter Loan Fees</label>
+                                        <input type="text" [(ngModel)]="newBank.loanFees" name="loanFees"
+                                            placeholder="Enter fees"
+                                            class="border border-[#E2E8F0] rounded-md p-2 w-full bg-[#F1F5F9]">
+                                    </div>
+                                </div>
+                            </nz-form-item>
+                        </div>
+                    </div>
+
+                    <!-- TOKEN CONFIGURATION Section -->
+                    <div>
+                        <div class="mt-4">
+                            <nz-form-item class="flex items-center justify-between mb-1">
+                                <h3 class="font-semibold text-[#00000080] text-sm">TOKEN CONFIGURATION</h3>
+                                <nz-radio-group [(ngModel)]="tokenEnabled" name="token">
+                                    <label nz-radio [nzValue]="true" class="mr-2">Yes</label>
+                                    <label nz-radio [nzValue]="false">No</label>
+                                </nz-radio-group>
+                            </nz-form-item>
+                            <div *ngIf="tokenEnabled">
+                                <nz-form-item>
+                                    <label>Token Endpoint</label>
+                                    <input type="text"
+                                        class="border border-[#E2E8F0] bg-[#F1F5F9] rounded-md h-[32px] w-full h-[35px] p-2 text-sm"
+                                        placeholder="eg. https://api/tokens">
+                                </nz-form-item>
+                                <nz-form-item>
+                                    <label>Username</label>
+                                    <input type="text"
+                                        class="border border-[#E2E8F0] bg-[#F1F5F9] rounded-md h-[32px] w-full h-[35px] p-2 text-sm"
+                                        placeholder="Token Username">
+                                </nz-form-item>
+                                <nz-form-item>
+                                    <label>Password</label>
+                                    <input type="password"
+                                        class="border border-[#E2E8F0] bg-[#F1F5F9] rounded-md h-[32px] w-full h-[35px] p-2 text-sm"
+                                        placeholder="Token Password">
+                                </nz-form-item>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <!-- Modal Footer Buttons -->
+            <div class="flex items-center gap-2 justify-end mt-6 pt-3 border-t border-gray-200 -mx-6 px-6">
+                <button (click)="handleCancel()"
+                    class="bg-gray-200 text-black px-4 py-1 rounded-md text-sm hover:bg-gray-300 transition">
+                    Cancel
+                </button>
+                <button (click)="submit(newBankForm)"
+                    class="bg-blue-600 text-white px-4 py-1 rounded-md text-sm hover:bg-blue-700 transition">
+                    Add Bank
+                </button>
+            </div>
+        </ng-container>
+    </nz-modal>
+
+    <nz-dropdown-menu #menu="nzDropdownMenu">
+        <div class="bg-white border border-[#E4E7EC] rounded-md p-2 w-[120px] z-50 flex flex-col gap-2 shadow-lg">
+            <button (click)="edit()" class="flex items-center gap-2">
+                <img src="edit.svg" alt="">
+                Edit
+            </button>
+            <button (click)="deleteBank()" class="flex items-center gap-2">
+                <img src="delete.svg" alt="">
+                <span class="text-red-500">Delete</span>
+            </button>
+        </div>
+    </nz-dropdown-menu>
+
+    <!-- EDIT BANK CONFIGURATION MODAL -->
+    <nz-modal [(nzVisible)]="isEditVisible" [nzTitle]="'Editing ' + editForm.bankName" [nzFooter]="null"
+        (nzOnCancel)="cancelEdit()">
+        <ng-container *nzModalContent class="h-[50vh]">
+            <div style="max-height: 60vh; overflow-y: auto;">
+                <form>
+                    <div class="border-b border-gray-200 -mx-6 px-6 pb-4">
+                        <nz-form-item class="mb-2">
+                            <label class="text-[#000000] font-normal text-[14px] block mb-1">Bank Name</label>
+                            <input type="text" [(ngModel)]="editForm.bankName" name="bankName"
+                                class="border border-[#E2E8F0] bg-[#F1F5F9] rounded-md h-[32px] w-full h-[35px] p-2 text-sm"
+                                placeholder="eg. GCB Bank">
+                        </nz-form-item>
+
+                        <nz-form-item class="mb-2">
+                            <label class="text-[#000000] font-normal text-[14px] block mb-1">Bank Code</label>
+                            <input type="text" [(ngModel)]="editForm.bankCode" name="bankCode"
+                                class="border border-[#E2E8F0] bg-[#F1F5F9] rounded-md h-[32px] w-full h-[35px] p-2 text-sm"
+                                placeholder="eg. GCB">
+                        </nz-form-item>
+
+                        <!-- <nz-form-item class="mb-0 pb-2">
+                        <label class="text-[#000000] font-normal text-[14px] block mb-1">Fee Percentage (%)</label>
+                        <input type="text" [(ngModel)]="editForm.feePercentage" name="feePercentage"
+                            class="border border-[#E2E8F0] bg-[#F1F5F9] rounded-md h-[32px] w-full h-[35px] p-2 text-sm"
+                            placeholder="eg. 1.5">
+                    </nz-form-item> -->
+                    </div>
+
+                    <!-- ENDPOINT CONFIGURATION Section -->
+                    <div class="mt-3">
+                        <h3 class="text-sm mb-2 text-[#00000080] font-medium">ENDPOINT CONFIGURATION</h3>
+
+                        <div class="space-y-2">
+                            <nz-form-item class="flex flex-col mb-1">
+                                <div class="flex items-center justify-between">
+                                    <h3 class="font-medium text-sm">Enable Wallet-to-Bank Endpoint</h3>
+                                    <!-- <nz-radio-group [(ngModel)]="walletToBankEnabled" name="walletToBank">
+                                <label nz-radio [nzValue]="true" class="mr-2">Yes</label>
+                                <label nz-radio [nzValue]="false">No</label>
+                            </nz-radio-group> -->
+                                </div>
+
+                                <div *ngIf="walletToBankEnabled" class="mt-2">
+                                    <label for="w2bEndpoint">Enter Endpoint URL</label>
+                                    <input type="text" [(ngModel)]="editForm.w2bEndpoint" name="w2bEndpointUrl"
+                                        placeholder="Enter Wallet-to-Bank Endpoint"
+                                        class="mb-1 border border-[#E2E8F0] rounded-md p-2 w-full bg-[#F1F5F9]">
+                                    <label for="w2bEndpoint">Wallet to Bank Fees</label>
+                                    <input type="text" [(ngModel)]="editForm.w2bFees" name="w2bFees"
+                                        placeholder="Enter fees"
+                                        class="border border-[#E2E8F0] rounded-md p-2 w-full bg-[#F1F5F9]">
+                                </div>
+
+                            </nz-form-item>
+
+                            <nz-form-item class="flex flex-col mb-1">
+                                <div class="flex items-center justify-between">
+                                    <h3 class="font-medium text-sm">Enable Bank-to-Wallet Endpoint</h3>
+                                    <!-- <nz-radio-group [(ngModel)]="bankToWalletEnabled" name="bankToWallet">
+                                <label nz-radio [nzValue]="true" class="mr-2">Yes</label>
+                                <label nz-radio [nzValue]="false">No</label>
+                            </nz-radio-group> -->
+                                </div>
+
+                                <div *ngIf="bankToWalletEnabled" class="mt-2">
+                                    <label for="b2wEndpoint">Enter Endpoint URL</label>
+                                    <input type="text" [(ngModel)]="editForm.b2wEndpoint" name="b2wEndpointUrl"
+                                        placeholder="Enter Bank-to-Wallet Endpoint"
+                                        class="mb-1 border border-[#E2E8F0] rounded-md p-2 w-full bg-[#F1F5F9]">
+                                    <label for="b2wEndpoint">Bank to Wallet Fees</label>
+                                    <input type="text" [(ngModel)]="editForm.b2wFees" name="b2wFees"
+                                        placeholder="Enter fees"
+                                        class="border border-[#E2E8F0] rounded-md p-2 w-full bg-[#F1F5F9]">
+                                </div>
+
+                            </nz-form-item>
+
+                            <nz-form-item class="flex flex-col mb-1">
+                                <div class="flex items-center justify-between">
+                                    <h3 class="font-medium text-sm">Enable Account to Account Endpoint</h3>
+                                    <!-- <nz-radio-group [(ngModel)]="accountToAccountEnabled" name="accountToAccount">
+                                <label nz-radio [nzValue]="true" class="mr-2">Yes</label>
+                                <label nz-radio [nzValue]="false">No</label>
+                            </nz-radio-group> -->
+                                </div>
+
+                                <div *ngIf="accountToAccountEnabled" class="mt-2">
+                                    <label for="a2aEndpoint">Enter Endpoint URL</label>
+                                    <input type="text" [(ngModel)]="editForm.a2aEndpoint" name="a2aEndpointUrl"
+                                        placeholder="Enter Account-to-Account Endpoint"
+                                        class="mb-1 border border-[#E2E8F0] rounded-md p-2 w-full bg-[#F1F5F9]">
+                                    <label for="a2aEndpoint">Account to Account Fees</label>
+                                    <input type="text" [(ngModel)]="editForm.a2aFees" name="a2aFees"
+                                        placeholder="Enter fees"
+                                        class="border border-[#E2E8F0] rounded-md p-2 w-full bg-[#F1F5F9]">
+                                </div>
+                            </nz-form-item>
+
+                            <nz-form-item class="flex flex-col mb-1">
+                                <div class="flex items-center justify-between">
+                                    <h3 class="font-medium text-sm">Enable Interbank Endpoint</h3>
+                                    <!-- <nz-radio-group [(ngModel)]="interbankEnabled" name="interbank">
+                                        <label nz-radio [nzValue]="true" class="mr-2">Yes</label>
+                                        <label nz-radio [nzValue]="false">No</label>
+                                    </nz-radio-group> -->
+                                </div>
+
+                                <div *ngIf="interbankEnabled" class="mt-2">
+                                    <label for="interbankEndpoint">Enter Endpoint URL</label>
+                                    <input type="text" [(ngModel)]="editForm.interBankEndpoint"
+                                        name="interbankEndpointUrl" placeholder="Enter Interbank Endpoint"
+                                        class="mb-1 border border-[#E2E8F0] rounded-md p-2 w-full bg-[#F1F5F9]">
+                                    <label for="interbankEndpoint">Interbank Fees(GIP)</label>
+                                    <input type="text" [(ngModel)]="editForm.interBankFees" name="interbankFees"
+                                        placeholder="Enter fees"
+                                        class="border border-[#E2E8F0] rounded-md p-2 w-full bg-[#F1F5F9]">
+                                </div>
+                            </nz-form-item>
+
+                            <nz-form-item class="flex flex-col mb-1">
+                                <div class="flex items-center justify-between">
+                                    <h3 class="font-medium text-sm">Enable Loan Endpoint</h3>
+                                    <!-- <nz-radio-group [(ngModel)]="loanEnabled" name="loan">
+                                        <label nz-radio [nzValue]="true" class="mr-2">Yes</label>
+                                        <label nz-radio [nzValue]="false">No</label>
+                                    </nz-radio-group> -->
+                                </div>
+
+                                <div *ngIf="loanEnabled" class="mt-2">
+                                    <label for="loanEndpoint">Enter Endpoint URL</label>
+                                    <input type="text" [(ngModel)]="editForm.loanEndpoint" name="loanEndpointUrl"
+                                        placeholder="Enter Loan Endpoint"
+                                        class="mb-1 border border-[#E2E8F0] rounded-md p-2 w-full bg-[#F1F5F9]">
+                                    <label for="loanEndpoint">Enter Fees</label>
+                                    <input type="text" [(ngModel)]="editForm.loanFees" name="loanFees"
+                                        placeholder="Enter fees"
+                                        class="border border-[#E2E8F0] rounded-md p-2 w-full bg-[#F1F5F9]">
+                                </div>
+                            </nz-form-item>
+                            <nz-form-item class="flex flex-col mb-1">
+                                <label for="billFees">Enter Bill Fee</label>
+                                <input type="text" [(ngModel)]="editForm.billFees" name="billFees"
+                                    placeholder="Enter Bill Fee"
+                                    class="mb-1 border border-[#E2E8F0] rounded-md p-2 w-full bg-[#F1F5F9]">
+                            </nz-form-item>
+
+                            <nz-form-item class="flex flex-col mb-1">
+                                <label for="airtimeFees">Enter Airtime Fee</label>
+                                <input type="text" [(ngModel)]="editForm.airtimeFees" name="airtimeFees"
+                                    placeholder="Enter Airtime Fee"
+                                    class="mb-1 border border-[#E2E8F0] rounded-md p-2 w-full bg-[#F1F5F9]">
+                            </nz-form-item>
+                        </div>
+                    </div>
+
+                    <div>
+                        <div class="mt-4">
+                            <nz-form-item class="flex items-center justify-between mb-1">
+                                <h3 class="font-semibold text-[#00000080] text-sm">TOKEN CONFIGURATION</h3>
+                                <nz-radio-group [(ngModel)]="tokenEnabled" name="token">
+                                    <label nz-radio [nzValue]="true" class="mr-2">Yes</label>
+                                    <label nz-radio [nzValue]="false">No</label>
+                                </nz-radio-group>
+                            </nz-form-item>
+                            <div *ngIf="tokenEnabled">
+                                <nz-form-item>
+                                    <label>Token Endpoint</label>
+                                    <input type="text"
+                                        class="border border-[#E2E8F0] bg-[#F1F5F9] rounded-md h-[32px] w-full h-[35px] p-2 text-sm"
+                                        placeholder="eg. https://api/tokens">
+                                </nz-form-item>
+                                <nz-form-item>
+                                    <label>Username</label>
+                                    <input type="text"
+                                        class="border border-[#E2E8F0] bg-[#F1F5F9] rounded-md h-[32px] w-full h-[35px] p-2 text-sm"
+                                        placeholder="Token Username">
+                                </nz-form-item>
+                                <nz-form-item>
+                                    <label>Password</label>
+                                    <input type="password"
+                                        class="border border-[#E2E8F0] bg-[#F1F5F9] rounded-md h-[32px] w-full h-[35px] p-2 text-sm"
+                                        placeholder="Token Password">
+                                </nz-form-item>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <!-- Modal Footer Buttons -->
+            <div class="flex items-center gap-2 justify-end mt-6 pt-3 border-t border-gray-200 -mx-6 px-6">
+                <button (click)="cancelEdit()"
+                    class="bg-gray-200 text-black px-4 py-1 rounded-md text-sm hover:bg-gray-300 transition">
+                    Cancel
+                </button>
+                <button (click)="editBank(editForm)"
+                    class="bg-blue-600 text-white px-4 py-1 rounded-md text-sm hover:bg-blue-700 transition">
+                    Edit Bank
+                </button>
+            </div>
+        </ng-container>
+    </nz-modal>
+
+    <!-- remove bank modal -->
+    <div *ngIf="isDeleteOpen == true" class="absolute bg-white shadow-md rounded-[20px] p-4 w-[300px] top-[35%] right-[40%]
+     flex flex-col items-center justify-center gap-4">
+        <img src="trash.svg" alt="Bank Image" class="h-[30px] w-[30px]">
+        <h3 class="text-[17px] font-semibold">Remove Bank ?</h3>
+        <p class="text-[#898989] text-[12px]">Are you sure you want to remove this bank? This action cannot be undone.
+        </p>
+        <div class="flex items-center gap-2 mb-4">
+            <button (click)="cancelDelete()"
+                class="bg-white border border-[#E2E8F0] text-black px-4 py-1 rounded-md h-[31px] text-sm hover:bg-gray-300 transition">
+                Cancel
+            </button>
+            <button (click)="confirmDelete()"
+                class="bg-[#FFEAEA] text-[#923636] px-4 py-1 rounded-md h-[31px] text-sm hover:bg-red-700 hover:text-white transition">
+                Confirm
+            </button>
+        </div>
+    </div>
+
+    <!-- Profile and Logout  -->
+    <div #profileMenu *ngIf="isProfileOpen"
+        class="absolute bg-white border border-[#E4E7EC] rounded-md shadow-lg w-[120px] top-[6%] right-[2%] z-50">
+        <div class="flex flex-col py-2">
+            <button
+                class="flex items-center gap-2 text-left px-4 text-[14px] font-medium hover:bg-gray-50 transition-colors">
+                <img src="/profile.png" alt="">
+                Profile
+            </button>
+            <div class="border-t border-[#E4E7EC] my-1"></div>
+            <button (click)="logout()"
+                class="flex items-center gap-2 text-left px-4 text-[14px] font-medium hover:bg-gray-50 transition-colors">
+                <img src="/sign-out.png" alt="">
+                Logout
+            </button>
+        </div>
+    </div>
+
 </section>

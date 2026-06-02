@@ -12,3 +12,24 @@
 ::ng-deep .ant-table-thead > tr > th {
   background-color: #F8FAFC !important;
 }
+
+.search-wrapper:focus-within {
+  border-color: #3b82f6; 
+  box-shadow: 0 0 0 2px rgba(59,130,246,0.3); 
+}
+
+// .action-menu {
+//     position: fixed;
+//     transform: translate(10px, -50%);
+// }
+
+// tr {
+//     position: relative;
+// }
+
+.action-menu {
+    position: absolute;
+    right: 10px;
+    top: 30%;
+    transform: translateY(-50%);
+}
