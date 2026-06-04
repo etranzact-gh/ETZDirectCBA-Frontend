@@ -28,29 +28,10 @@
                 <span class="text-[#000000]/50 font-normal text-[11px] md:text-[14px] lg:text-[14px]">Manage connected
                     financial institutions, endpoints, and authentication</span>
             </div>
-            <!-- <div class="flex flex-col md:flex-row md:items-center gap-2 w-full md:w-auto">
-
-                <div
-                    class="search-wrapper w-full md:w-[300px] lg:w-[380px] h-[32px] flex gap-2 text-gray-400  p-1 border border-[#D7D7D7] pl-2 md:pl-4 lg:pl-4 rounded-md items-center">
-                    <img src="/search.png" alt="" class="w-[20px] h-[20px]">
-                    <input type="text" name="searchUnit" id="searchUnit" [(ngModel)]="searchQuery"
-                        (input)="searchforBank()" placeholder="Search banks, codes, URLs..."
-                        class="w-full rounded-lg !text-[12px] md:!text-[15px] outline-none">
-                </div>
-                <button (click)="showModal()"
-                    class=" bg-blue-600 rounded-md h-[32px] w-[120px] md:w-[150px] lg:w-[170px] p-2 flex flex-end gap-1 items-center 
-                    justify-center cursor-pointer sm:flex-end">
-                     <img src="/plus.svg" alt="" class="lg:w-[24px] md:w-[24px] w-[20px]">
-                    <span class="text-white font-normal text-[11px] md:text-[13px] lg:text-[14px] flex items-center gap-1">
-                       Add New Bank</span>
-                </button>
-            </div> -->
-            <div class="flex flex-col md:flex-row md:items-center gap-2 w-full md:w-auto">
-
+            <div class="flex flex-col md:flex-row md:items-center justify-between gap-2 w-full md:w-auto">
                 <!-- Search -->
                 <div
                     class="search-wrapper w-full md:w-[300px] lg:w-[380px] h-[40px] flex gap-2 text-gray-400 p-1 border border-[#D7D7D7] pl-3 rounded-md items-center">
-
                     <img src="/search.png" alt="" class="w-[20px] h-[20px]">
                     <input type="text" name="searchUnit" id="searchUnit" [(ngModel)]="searchQuery"
                         (input)="searchforBank()" (ngModelChange)="onSearchChange($event)"
@@ -59,11 +40,8 @@
                 </div>
 
                 <button (click)="showModal()" class="bg-blue-600 rounded-md h-[40px] 
-    w-full md:w-[120px] lg:w-[170px]
-    p-2 flex gap-1 items-center justify-center cursor-pointer">
-
+        w-[130px] md:w-[130px] lg:w-[170px] p-2 flex gap-1 items-center justify-center cursor-pointer ml-auto md:ml-0">
                     <img src="/plus.svg" alt="" class="w-[20px] md:w-[22px] lg:w-[24px]">
-
                     <span class="text-white font-normal text-[12px] md:text-[12px] lg:text-[14px]">
                         Add New Bank
                     </span>
@@ -72,6 +50,7 @@
 
         </div>
 
+        <!-- TABLE  TABLE  TABLE -->
         <div class="border border-[#DCDEE3] rounded-lg w-full mt-[30px] overflow-x-auto overflow-y-visible">
             <nz-table [nzScroll]="{ x: '1300px',y:'545px' }" [nzBordered]="false" [nzShowPagination]="false"
                 [nzData]="BankList">
@@ -147,13 +126,6 @@
                                 class="border border-[#E2E8F0] bg-[#F1F5F9] rounded-md h-[32px] w-full h-[35px] p-2 text-sm"
                                 placeholder="eg. GCB">
                         </nz-form-item>
-
-                        <!-- <nz-form-item class="mb-0 pb-2">
-                                                <label class="text-[#000000] font-normal text-[14px] block mb-1">Fee Percentage (%)</label>
-                                                <input type="text" [(ngModel)]="newBank.feePercentage" name="feePercentage"
-                                                    class="border border-[#E2E8F0] bg-[#F1F5F9] rounded-md h-[32px] w-full h-[35px] p-2 text-sm"
-                                                    placeholder="eg. 1.5">
-                                            </nz-form-item> -->
                     </div>
 
                     <!-- ENDPOINT CONFIGURATION Section -->
