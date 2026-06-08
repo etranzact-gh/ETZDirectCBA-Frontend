@@ -32,4 +32,4 @@ COPY --from=builder /ETZDirectCBA-Frontend/dist ./dist
 EXPOSE 6062
 
 # Serve the built files
-CMD ["serve", "-s", "dist/browser", "-l", "6062"]
+CMD ["serve", "-s", "dist/direct-cba/browser", "-l", "6062"]
