@@ -1,35 +1,20 @@
-# Use the official Node.js 18 image as the base image
-FROM node:18 AS builder
+# Use official Node.js image
+FROM node:18-alpine
 
 # Set the working directory inside the container
-WORKDIR /ETZDirectCBA-Frontend
+WORKDIR /app
 
-# Copy package.json and package-lock.json
+# Copy package.json and package-lock.json to install dependencies first (for caching)
 COPY package*.json ./
 
 # Install dependencies
-RUN npm install --force
+RUN npm install --legacy-peer-deps
 
-# Copy the rest of the application code
+# Copy the entire project
 COPY . .
 
-# Build the application
-RUN npm run build
+# Expose port 4200 for the Angular development server
+EXPOSE 4200
 
-# Use a lightweight web server to serve the built files
-FROM node:18-slim
-
-# Install 'serve' to serve the static files
-RUN npm install -g serve
-
-# Set the working directory to /app
-WORKDIR /ETZDirectCBA-Frontend
-
-# Copy the build output from the previous stage
-COPY --from=builder /ETZDirectCBA-Frontend/dist ./dist
-
-# Expose port 6062
-EXPOSE 6062
-
-# Serve the built files
-CMD ["serve", "-s", "dist/direct-cba/browser", "-l", "6062"]
+# Start the Angular dev server
+CMD ["npm", "run", "start"]
