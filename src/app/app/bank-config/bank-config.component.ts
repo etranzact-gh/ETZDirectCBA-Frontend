@@ -254,7 +254,7 @@ resetNewBank(): void {
         // console.log('Banks fetched successfully:', response);
       },
       error: (error) => {
-        console.error('Error fetching banks:', error);
+        // console.error('Error fetching banks:', error);
       }
     })
   }
@@ -343,13 +343,11 @@ resetNewBank(): void {
     if (!this.selectedBank) return;
     this.bankConfigService.deleteBank(this.selectedBank.bankCode).subscribe({
       next: (response) => {
-        console.log("bank deleted successfully", response);
         this.isDeleteOpen = false;
         this.createNotification('topRight', "success", "SUCCESS", "Bank deleted successfully");     
         this.getAllBanks();
       },
       error: (error) => {
-        console.log("error deleting bank", error);
         this.isDeleteOpen = false;
         this.createNotification('topRight', "error", "ERROR", "Error deleting bank");
         this.getAllBanks();
@@ -375,10 +373,10 @@ resetNewBank(): void {
   this.bankConfigService.searchBanks(this.searchQuery).subscribe({
     next: (response) => {
       this.BankList = response;
-      console.log("Search results:", response);
+      // console.log("Search results:", response);
     },
     error: (error) => {
-      console.error("Error searching for banks:", error);
+      // console.error("Error searching for banks:", error);
     }
   });
 }

@@ -9,12 +9,14 @@
         <div (click)="openProfile($event)" class="flex items-center gap-2">
 
             <span class="w-[17px] h-[17px] md:w-[20px] md:h-[20px] lg:w-[27px] lg:h-[27px] border rounded-full bg-white text-[#2563EB]
-                text-[11px] md:text-[14px] lg:text-[14px] font-semibold p-2 flex items-center justify-center">AD</span>
+                text-[11px] md:text-[14px] lg:text-[14px] font-semibold p-2 flex items-center justify-center">A</span>
 
             <span class="text-[#FFFFFF] font-normal text-[14px] md:text-[15px] lg:text-[16px]">
                 Admin
             </span>
 
+            <img *ngIf="!isProfileOpen" src="arrow-down.png" alt="">
+            <img *ngIf="isProfileOpen" src="up-arrow.svg" alt="">
             <img *ngIf="!isProfileOpen" src="arrow-down.png" alt="">
             <img *ngIf="isProfileOpen" src="up-arrow.svg" alt="">
 
@@ -29,13 +31,12 @@
                     financial institutions, endpoints, and authentication</span>
             </div>
             <div class="flex flex-col md:flex-row md:items-center justify-between gap-2 w-full md:w-auto">
-                <!-- Search -->
-                <div
-                    class="search-wrapper w-full md:w-[300px] lg:w-[380px] h-[40px] flex gap-2 text-gray-400 p-1 border border-[#D7D7D7] pl-3 rounded-md items-center">
-                    <img src="search.png" alt="" class="w-[20px] h-[20px]">
-                    <input type="text" name="searchUnit" id="searchUnit" [(ngModel)]="searchQuery"
-                        (input)="searchforBank()" (ngModelChange)="onSearchChange($event)"
-                        placeholder="Search banks, codes, URLs..."
+                <!-- SEARCH -->
+                <div class="search-wrapper w-full md:w-[300px] lg:w-[380px] h-[40px] flex gap-2 text-gray-400 p-1 border
+                 border-[#D7D7D7] pl-3 rounded-md items-center hidden md:flex lg:flex">
+                    <img src="/search.png" alt="" class="w-[20px] h-[20px]">
+                    <input type="text" name="searchUnit" id="searchUnit" [(ngModel)]="searchQuery" (input)="searchforBank()"
+                        (ngModelChange)="onSearchChange($event)" placeholder="Search banks, codes, URLs..."
                         class="w-full rounded-lg text-[13px] md:text-[15px] outline-none bg-transparent">
                 </div>
 
@@ -47,7 +48,13 @@
                     </span>
                 </button>
             </div>
-
+        </div>
+        <div class="search-wrapper w-full md:w-[300px] lg:w-[380px] h-[35px] flex gap-2 text-gray-400 p-1 border
+                 border-[#D7D7D7] pl-3 rounded-md items-center flex md:hidden lg:hidden mt-2">
+                    <img src="search.png" alt="" class="w-[20px] h-[20px]">
+                    <input type="text" name="searchUnit" id="searchUnit" [(ngModel)]="searchQuery" (input)="searchforBank()"
+                        (ngModelChange)="onSearchChange($event)" placeholder="Search banks, codes, URLs..."
+                        class="w-full rounded-lg text-[13px] md:text-[15px] outline-none bg-transparent">
         </div>
 
         <!-- TABLE  TABLE  TABLE -->
@@ -135,10 +142,9 @@
                         <div class="space-y-2 border-b border-gray-200 -mx-6 px-6 pb-4">
                             <!-- w2b Endpoint -->
                             <nz-form-item class="flex flex-col mb-2">
-                                <div class="flex items-center justify-between">
-                                    <h3 class="font-medium text-sm">Enable Wallet-to-Bank Endpoint</h3>
-
-                                    <nz-radio-group [(ngModel)]="newBank.w2bEnabled" name="walletToBank">
+                                <div class="flex items-center justify-between gap-2">
+                                    <h3 class="font-medium text-sm flex-1 min-w-0">Enable Wallet-to-Bank Endpoint</h3>
+                                    <nz-radio-group [(ngModel)]="newBank.w2bEnabled" name="walletToBank" class="shrink-0">
                                         <label nz-radio [nzValue]="true" class="mr-2">Yes</label>
                                         <label nz-radio [nzValue]="false">No</label>
                                     </nz-radio-group>
@@ -158,9 +164,9 @@
 
                             <!-- b2w Endpoint -->
                             <nz-form-item class="flex flex-col mb-2">
-                                <div class="flex items-center justify-between">
-                                    <h3 class="font-medium text-sm">Enable Bank-to-Wallet Endpoint</h3>
-                                    <nz-radio-group [(ngModel)]="newBank.b2wEnabled" name="bankToWallet">
+                                <div class="flex items-center justify-between gap-2">
+                                    <h3 class="font-medium text-sm flex-1 min-w-0">Enable Bank-to-Wallet Endpoint</h3>
+                                    <nz-radio-group [(ngModel)]="newBank.b2wEnabled" name="bankToWallet" class="shrink-0">
                                         <label nz-radio [nzValue]="true" class="mr-2">Yes</label>
                                         <label nz-radio [nzValue]="false">No</label>
                                     </nz-radio-group>
@@ -178,9 +184,9 @@
                             </nz-form-item>
 
                             <nz-form-item class="flex flex-col mb-2">
-                                <div class="flex items-center justify-between">
-                                    <h3 class="font-medium text-sm">Enable Account to Account Endpoint</h3>
-                                    <nz-radio-group [(ngModel)]="newBank.a2aEnabled" name="accountToAccount">
+                                <div class="flex items-center justify-between gap-2">
+                                    <h3 class="font-medium text-sm flex-1 min-w-0">Enable Account to Account Endpoint</h3>
+                                    <nz-radio-group [(ngModel)]="newBank.a2aEnabled" name="accountToAccount" class="shrink-0">
                                         <label nz-radio [nzValue]="true" class="mr-2">Yes</label>
                                         <label nz-radio [nzValue]="false">No</label>
                                     </nz-radio-group>
@@ -201,9 +207,9 @@
                             </nz-form-item>
 
                             <nz-form-item class="flex flex-col mb-2">
-                                <div class="flex items-center justify-between">
-                                    <h3 class="font-medium text-sm">Enable Interbank Endpoint</h3>
-                                    <nz-radio-group [(ngModel)]="newBank.interbankEnabled" name="interbank">
+                                <div class="flex items-center justify-between gap-2">
+                                    <h3 class="font-medium text-sm flex-1 min-w-0">Enable Interbank Endpoint</h3>
+                                    <nz-radio-group [(ngModel)]="newBank.interbankEnabled" name="interbank" class="shrink-0">
                                         <label nz-radio [nzValue]="true" class="mr-2">Yes</label>
                                         <label nz-radio [nzValue]="false">No</label>
                                     </nz-radio-group>
@@ -224,9 +230,9 @@
                             </nz-form-item>
 
                             <nz-form-item class="flex flex-col mb-2">
-                                <div class="flex items-center justify-between">
-                                    <h3 class="font-medium text-sm">Enable Loan Endpoint</h3>
-                                    <nz-radio-group [(ngModel)]="newBank.loanEnabled" name="loan">
+                                <div class="flex items-center justify-between gap-2">
+                                    <h3 class="font-medium text-sm flex-1 min-w-0">Enable Loan Endpoint</h3>
+                                    <nz-radio-group [(ngModel)]="newBank.loanEnabled" name="loan" class="shrink-0">
                                         <label nz-radio [nzValue]="true" class="mr-2">Yes</label>
                                         <label nz-radio [nzValue]="false">No</label>
                                     </nz-radio-group>
@@ -251,9 +257,9 @@
                     <!-- TOKEN CONFIGURATION Section -->
                     <div>
                         <div class="mt-4">
-                            <nz-form-item class="flex items-center justify-between mb-1">
-                                <h3 class="font-semibold text-[#00000080] text-sm">TOKEN CONFIGURATION</h3>
-                                <nz-radio-group [(ngModel)]="tokenEnabled" name="token">
+                            <nz-form-item class="flex items-center justify-between gap-2 mb-1">
+                                <h3 class="font-semibold text-[#00000080] text-sm flex-1 min-w-0">TOKEN CONFIGURATION</h3>
+                                <nz-radio-group [(ngModel)]="tokenEnabled" name="token" class="shrink-0">
                                     <label nz-radio [nzValue]="true" class="mr-2">Yes</label>
                                     <label nz-radio [nzValue]="false">No</label>
                                 </nz-radio-group>
@@ -344,9 +350,9 @@
 
                         <div class="space-y-2">
                             <nz-form-item class="flex flex-col mb-1">
-                                <div class="flex items-center justify-between">
-                                    <h3 class="font-medium text-sm">Enable Wallet-to-Bank Endpoint</h3>
-                                    <!-- <nz-radio-group [(ngModel)]="walletToBankEnabled" name="walletToBank">
+                                <div class="flex items-center justify-between gap-2">
+                                    <h3 class="font-medium text-sm flex-1 min-w-0">Enable Wallet-to-Bank Endpoint</h3>
+                                    <!-- <nz-radio-group [(ngModel)]="walletToBankEnabled" name="walletToBank" class="shrink-0">
                                 <label nz-radio [nzValue]="true" class="mr-2">Yes</label>
                                 <label nz-radio [nzValue]="false">No</label>
                             </nz-radio-group> -->
@@ -366,9 +372,9 @@
                             </nz-form-item>
 
                             <nz-form-item class="flex flex-col mb-1">
-                                <div class="flex items-center justify-between">
-                                    <h3 class="font-medium text-sm">Enable Bank-to-Wallet Endpoint</h3>
-                                    <!-- <nz-radio-group [(ngModel)]="bankToWalletEnabled" name="bankToWallet">
+                                <div class="flex items-center justify-between gap-2">
+                                    <h3 class="font-medium text-sm flex-1 min-w-0">Enable Bank-to-Wallet Endpoint</h3>
+                                    <!-- <nz-radio-group [(ngModel)]="bankToWalletEnabled" name="bankToWallet" class="shrink-0">
                                 <label nz-radio [nzValue]="true" class="mr-2">Yes</label>
                                 <label nz-radio [nzValue]="false">No</label>
                             </nz-radio-group> -->
@@ -388,9 +394,9 @@
                             </nz-form-item>
 
                             <nz-form-item class="flex flex-col mb-1">
-                                <div class="flex items-center justify-between">
-                                    <h3 class="font-medium text-sm">Enable Account to Account Endpoint</h3>
-                                    <!-- <nz-radio-group [(ngModel)]="accountToAccountEnabled" name="accountToAccount">
+                                <div class="flex items-center justify-between gap-2">
+                                    <h3 class="font-medium text-sm flex-1 min-w-0">Enable Account to Account Endpoint</h3>
+                                    <!-- <nz-radio-group [(ngModel)]="accountToAccountEnabled" name="accountToAccount" class="shrink-0">
                                 <label nz-radio [nzValue]="true" class="mr-2">Yes</label>
                                 <label nz-radio [nzValue]="false">No</label>
                             </nz-radio-group> -->
@@ -409,9 +415,9 @@
                             </nz-form-item>
 
                             <nz-form-item class="flex flex-col mb-1">
-                                <div class="flex items-center justify-between">
-                                    <h3 class="font-medium text-sm">Enable Interbank Endpoint</h3>
-                                    <!-- <nz-radio-group [(ngModel)]="interbankEnabled" name="interbank">
+                                <div class="flex items-center justify-between gap-2">
+                                    <h3 class="font-medium text-sm flex-1 min-w-0">Enable Interbank Endpoint</h3>
+                                    <!-- <nz-radio-group [(ngModel)]="interbankEnabled" name="interbank" class="shrink-0">
                                         <label nz-radio [nzValue]="true" class="mr-2">Yes</label>
                                         <label nz-radio [nzValue]="false">No</label>
                                     </nz-radio-group> -->
@@ -430,9 +436,9 @@
                             </nz-form-item>
 
                             <nz-form-item class="flex flex-col mb-1">
-                                <div class="flex items-center justify-between">
-                                    <h3 class="font-medium text-sm">Enable Loan Endpoint</h3>
-                                    <!-- <nz-radio-group [(ngModel)]="loanEnabled" name="loan">
+                                <div class="flex items-center justify-between gap-2">
+                                    <h3 class="font-medium text-sm flex-1 min-w-0">Enable Loan Endpoint</h3>
+                                    <!-- <nz-radio-group [(ngModel)]="loanEnabled" name="loan" class="shrink-0">
                                         <label nz-radio [nzValue]="true" class="mr-2">Yes</label>
                                         <label nz-radio [nzValue]="false">No</label>
                                     </nz-radio-group> -->
@@ -467,9 +473,9 @@
 
                     <div>
                         <div class="mt-4">
-                            <nz-form-item class="flex items-center justify-between mb-1">
-                                <h3 class="font-semibold text-[#00000080] text-sm">TOKEN CONFIGURATION</h3>
-                                <nz-radio-group [(ngModel)]="tokenEnabled" name="token">
+                            <nz-form-item class="flex items-center justify-between gap-2 mb-1">
+                                <h3 class="font-semibold text-[#00000080] text-sm flex-1 min-w-0">TOKEN CONFIGURATION</h3>
+                                <nz-radio-group [(ngModel)]="tokenEnabled" name="token" class="shrink-0">
                                     <label nz-radio [nzValue]="true" class="mr-2">Yes</label>
                                     <label nz-radio [nzValue]="false">No</label>
                                 </nz-radio-group>
@@ -533,20 +539,15 @@
 
     <!-- Profile and Logout  -->
     <div #profileMenu *ngIf="isProfileOpen"
-        class="absolute bg-white border border-[#E4E7EC] rounded-md shadow-lg w-[120px] top-[6%] right-[2%] z-50">
-        <div class="flex flex-col py-2">
-            <button
-                class="flex items-center gap-2 text-left px-4 text-[14px] font-medium hover:bg-gray-50 transition-colors">
-                <img src="/profile.png" alt="">
-                Profile
-            </button>
-            <div class="border-t border-[#E4E7EC] my-1"></div>
+        class="absolute bg-white border border-[#E4E7EC] rounded-md shadow-lg w-[120px] top-[6%] right-[2%] z-50 p-1 py-2">
+        <!-- <div class="flex flex-col py-2"> -->
+            <!-- <div class="border-t border-[#E4E7EC] my-1"></div> -->
             <button (click)="logout()"
-                class="flex items-center gap-2 text-left px-4 text-[14px] font-medium hover:bg-gray-50 transition-colors">
-                <img src="/sign-out.png" alt="">
+                class="flex items-center gap-2 text-left px-4 text-[14px] text-[#000000]/60 font-medium hover:bg-gray-50 transition-colors">
+                <img src="sign-out.png" alt="" class="w-20px h-20px">
                 Logout
             </button>
-        </div>
+        <!-- </div> -->
     </div>
 
 </section>
