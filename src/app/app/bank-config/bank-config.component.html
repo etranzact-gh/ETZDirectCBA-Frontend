@@ -15,8 +15,8 @@
                 Admin
             </span>
 
-            <img *ngIf="!isProfileOpen" src="/arrow-down.png" alt="">
-            <img *ngIf="isProfileOpen" src="/up-arrow.svg" alt="">
+            <img *ngIf="!isProfileOpen" src="arrow-down.png" alt="">
+            <img *ngIf="isProfileOpen" src="up-arrow.svg" alt="">
 
         </div>
     </div>
@@ -32,7 +32,7 @@
                 <!-- Search -->
                 <div
                     class="search-wrapper w-full md:w-[300px] lg:w-[380px] h-[40px] flex gap-2 text-gray-400 p-1 border border-[#D7D7D7] pl-3 rounded-md items-center">
-                    <img src="/search.png" alt="" class="w-[20px] h-[20px]">
+                    <img src="search.png" alt="" class="w-[20px] h-[20px]">
                     <input type="text" name="searchUnit" id="searchUnit" [(ngModel)]="searchQuery"
                         (input)="searchforBank()" (ngModelChange)="onSearchChange($event)"
                         placeholder="Search banks, codes, URLs..."
@@ -41,7 +41,7 @@
 
                 <button (click)="showModal()" class="bg-blue-600 rounded-md h-[40px] 
         w-[130px] md:w-[130px] lg:w-[170px] p-2 flex gap-1 items-center justify-center cursor-pointer ml-auto md:ml-0">
-                    <img src="/plus.svg" alt="" class="w-[20px] md:w-[22px] lg:w-[24px]">
+                    <img src="plus.svg" alt="" class="w-[20px] md:w-[22px] lg:w-[24px]">
                     <span class="text-white font-normal text-[12px] md:text-[12px] lg:text-[14px]">
                         Add New Bank
                     </span>
